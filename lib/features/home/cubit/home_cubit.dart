@@ -10,13 +10,15 @@ class HomeCubit extends Cubit<HomeState> {
   void getHomeData() async {
     emit(HomeLoading());
     try {
-      final response = await Dio().get("http://127.0.0.1:8000/posts/");
+      final response = await Dio()
+          .get("https://0410-117-208-30-174.ngrok-free.app/job/posts");
       final List<Post> postList = [];
       for (final post in response.data) {
         postList.add(Post.fromJson(post));
       }
-      emit(HomeSuccess(postList));
+      emit(HomeSuccess(postList.reversed.toList()));
     } catch (e) {
+      print(e);
       emit(HomeError(e.toString()));
     }
   }
