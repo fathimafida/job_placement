@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,9 @@ import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/cubit/cubit/add_edit_job_post_cubit.dart';
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:job_placement/features/home/models/post.dart';
+import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
+
+import 'description_sheet_field.dart';
 
 class AddEditJobPost extends StatefulWidget {
   const AddEditJobPost({super.key, this.post});
@@ -24,13 +28,17 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
   final _descriptionController = TextEditingController();
   XFile? _selectedImage;
   void _pickImage() async {
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _selectedImage = pickedImage;
-      });
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        setState(() {
+          _selectedImage = pickedImage;
+        });
+      }
+    } catch (e) {
+      log("Crash Error: $e");
     }
   }
 
@@ -122,8 +130,16 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       return null;
                     }),
                 SizedBox(height: 10),
+                // DescriptionSheetField(
+                //     onSaved: (String? value) {
+                //       setState(() {
+                //         _descriptionController.text = value ?? "";
+                //       });
+                //     },
+                //     descriptionController: _descriptionController),
                 TextFormField(
-                    maxLength: 500,
+                    maxLength: 1000,
+                    onTap: () {},
                     controller: _descriptionController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),

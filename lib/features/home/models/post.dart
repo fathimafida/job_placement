@@ -6,6 +6,7 @@ class Post {
     required this.companyName,
     required this.image,
     required this.description,
+    required this.jobType,
   });
   late final int id;
   late final String title;
@@ -13,6 +14,8 @@ class Post {
   late final String companyName;
   late final String image;
   late final String description;
+  late final String jobType;
+  late final String url;
 
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -21,6 +24,8 @@ class Post {
     companyName = json['companyName'];
     image = json['image'];
     description = json['description'];
+    jobType = json['jobType'];
+    url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +36,7 @@ class Post {
     _data['companyName'] = companyName;
     _data['image'] = image;
     _data['description'] = description;
+    _data['jobType'] = jobType;
     return _data;
   }
 }

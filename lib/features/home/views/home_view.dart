@@ -7,6 +7,7 @@ import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
 
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
+import 'package:job_placement/features/home/views/viewAllPosts.dart';
 import 'package:job_placement/features/home/widgets/job_list.dart';
 
 class HomeView extends StatelessWidget {
@@ -44,11 +45,22 @@ class HomeView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            'Find Your Dream Job With Us',
-                            style: applyGoogleFontToText(
-                              20,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Find Your Dream',
+                                style: applyGoogleFontToText(
+                                  20,
+                                ),
+                              ),
+                              Text(
+                                'Job With Us ',
+                                style: applyGoogleFontToText(
+                                  20,
+                                ),
+                              ),
+                            ],
                           ),
                           Spacer(),
                           Container(
@@ -71,39 +83,29 @@ class HomeView extends StatelessWidget {
                           )
                         ],
                       ),
+                      Divider(),
                       SizedBox(
                         height: 10,
                       ),
-                      TextField(
-                        decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.search),
-                            hintText: 'Search jobs here.....',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Text(
-                        'Campus Placement',
+                        'Featured Jobs',
                         style: applyGoogleFontToText(20),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
-                      Column(
-                        children: [
-                          for (final post in state.postList)
-                            JobLists(
-                              post: post,
-                            ),
-                        ],
-                      ),
+                      Column(children: [
+                        JobLists(post: state.postList[0]),
+                        JobLists(post: state.postList[1]),
+                        JobLists(post: state.postList[2]),
+                      ]),
                       SizedBox(height: 10),
                       Align(
                         alignment: Alignment.center,
                         child: TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            navigateTO(context, ViewAllPosts());
+                          },
                           label: Text('View all'),
                           icon: Icon(Icons.arrow_forward),
                         ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_placement/common/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:job_placement/features/home/models/post.dart';
+
+import 'web_view_screen.dart';
 
 class JobDetailsPage extends StatelessWidget {
   const JobDetailsPage({super.key, required this.post});
@@ -46,33 +49,47 @@ class JobDetailsPage extends StatelessWidget {
                               style: applyTextStyle(15, FontWeight.normal)),
                         ],
                       )),
-                      const ListTile(
-                        title: Text("Hybrid Full Time"),
-                        leading: Icon(Icons.shopping_bag),
+                      const SizedBox(height: 15),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.shopping_bag,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(post.jobType,
+                                style: applyTextStyle(15, FontWeight.bold))
+                          ],
+                        ),
                       ),
-                      const ListTile(
-                        title: Text("1-10 employees"),
-                        leading: Icon(Icons.calendar_month),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      const ListTile(
-                        title: Text("Applicant review time is 10 days"),
-                        leading: Icon(Icons.verified),
-                      ),
-                      SizedBox(height: 10),
                       Text(
-                        "About the job",
-                        style: applyTextStyle(18, FontWeight.bold),
+                        "Job Description",
+                        style: applyTextStyle(20, FontWeight.bold),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 8),
                       Text(post.description,
                           style: applyTextStyle(16, FontWeight.normal)),
-                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  navigateTO(
+                      context,
+                      WebViewScreen(
+                        url: post.url,
+                      ));
+                },
                 child: Text(
                   "Apply Now",
                   style: applyTextStyle(16, FontWeight.bold),
