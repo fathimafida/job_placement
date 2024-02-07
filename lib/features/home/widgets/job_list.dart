@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
-import 'package:job_placement/features/detailPage/job_detail_page.dart';
-import 'package:job_placement/features/home/cubit/cubit/delete_cubit.dart';
+import 'package:job_placement/features/detailPage/views/job_detail_page.dart';
+import 'package:job_placement/features/home/cubit/home_cubit.dart';
+
 import 'package:job_placement/features/home/models/post.dart';
 
 class JobLists extends StatefulWidget {
@@ -75,25 +76,26 @@ class _JobListsState extends State<JobLists> {
                           ],
                         )),
                     PopupMenuItem(
-                        onTap: () {
-                          context
-                              .read<DeleteCubit>()
-                              .deleteJobPost(postId: widget.post.id);
-                        },
-                        child: Row(
-                          children: [
-                            Icon(Icons.delete_outline),
-                            Text('Delete'),
-                          ],
-                        )),
-                    PopupMenuItem(
+                      onTap: () {
+                        context
+                            .read<HomeCubit>()
+                            .deletePost(id: widget.post.id);
+                      },
+                      child: Row(
+                        children: [
+                          Icon(Icons.delete_outline),
+                          Text('Delete'),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
                         child: Row(
                       children: [
                         Icon(Icons.bookmark_outline),
                         Text('Save'),
                       ],
                     )),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                         child: Row(
                       children: [
                         Icon(Icons.flag_outlined),
@@ -101,10 +103,10 @@ class _JobListsState extends State<JobLists> {
                       ],
                     )),
                   ];
-                })),
+                }))
           ],
         ),
-        Divider(),
+        const Divider(),
       ]),
     );
   }

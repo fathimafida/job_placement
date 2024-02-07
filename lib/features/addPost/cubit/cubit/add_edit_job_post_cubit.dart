@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:job_placement/common/utils/dioClient.dart';
 import 'package:job_placement/features/home/models/post.dart';
 
 part 'add_job_edit_post_state.dart';
@@ -27,13 +28,11 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
             filename: image.name,
           )
       });
-      print("before");
-      final response = await Dio().post(
-          "https://0410-117-208-30-174.ngrok-free.app/job/posts/",
-          data: formData);
 
-      print("after");
+      final response = await dioClient.post("/job/posts/", data: formData);
+
       print(response.data);
+
       emit(AddEditJobPostSuccess());
     } on DioException catch (e) {
       print(e);
@@ -66,13 +65,12 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
           )
       });
       print("before");
-      final response = await Dio().patch(
-          "https://0410-117-208-30-174.ngrok-free.app/job/posts/${post.id}",
-          data: formData);
+      final response =
+          await dioClient.patch("/job/posts/${post.id}/", data: formData);
       emit(AddEditJobPostSuccess());
     } on DioException catch (e) {
       print(e);
-      print(e.response?.data?.toString());
+
       emit(AddEditJobPostError(e.toString()));
     } catch (e) {
       print(e);

@@ -16,3 +16,12 @@ final class HomeError extends HomeState {
   final String message;
   HomeError(this.message);
 }
+
+final class DeletePostLoading extends HomeState {}
+
+final class DeletePostSuccess extends HomeState {}
+
+final class DeletePostError extends HomeState {
+  final String message;
+  DeletePostError(this.message);
+}

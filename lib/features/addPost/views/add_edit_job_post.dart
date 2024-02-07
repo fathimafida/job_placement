@@ -41,7 +41,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
       _companyNameController.text = widget.post!.companyName;
       _placeController.text = widget.post!.place;
       _descriptionController.text = widget.post!.description;
-      // _selectedImage =;
+      // _selectedImage = XFile(widget.post!.image);
     }
     super.initState();
   }
@@ -64,17 +64,18 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                     _pickImage();
                   },
                   child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage: _selectedImage != null
-                          ? FileImage(File(_selectedImage!.path))
-                          : null,
-                      child: _selectedImage == null
-                          ? TextButton.icon(
-                              onPressed: _pickImage,
-                              icon: Icon(Icons.image),
-                              label: Text("Pick Image"))
-                          : null),
+                    radius: 70,
+                    backgroundImage: _selectedImage != null
+                        ? FileImage(File(_selectedImage!.path))
+                        : widget.post?.image != null
+                            ? NetworkImage(widget.post!.image) as ImageProvider
+                            : null,
+                  ),
                 ),
+                TextButton.icon(
+                    onPressed: _pickImage,
+                    icon: Icon(Icons.image),
+                    label: Text("Pick Image")),
                 SizedBox(height: 20),
                 TextFormField(
                     maxLength: 50,
@@ -140,7 +141,9 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                     if (state is AddEditJobPostSuccess) {
                       context.read<HomeCubit>().getHomeData();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Job posted successfully"),
+                        content: widget.post != null
+                            ? Text("Post Edited Successfully")
+                            : Text("Post Added Successfully"),
                       ));
 
                       context.read<HomeCubit>().getHomeData();
@@ -160,7 +163,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                     return ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          widget.post != null
+                          widget.post == null
                               ? context.read<AddEditJobPostCubit>().addJobPost(
                                     title: _titleController.text,
                                     description: _descriptionController.text,
@@ -174,7 +177,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                                     description: _descriptionController.text,
                                     place: _placeController.text,
                                     companyName: _companyNameController.text,
-                                    // image: _selectedImage,
+                                    image: _selectedImage,
                                   );
                         }
                       },
