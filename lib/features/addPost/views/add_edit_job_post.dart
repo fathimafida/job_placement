@@ -26,6 +26,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
   final _jobTypeController = TextEditingController();
   final _urlController = TextEditingController();
   XFile? _selectedImage;
+
   void _pickImage() async {
     try {
       final imagePicker = ImagePicker();

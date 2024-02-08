@@ -11,6 +11,7 @@ class ViewAllPosts extends StatefulWidget {
 }
 
 class _ViewAllPostsState extends State<ViewAllPosts> {
+  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,28 +22,36 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
           child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-            if (state is HomeSuccess) {
-              return Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search jobs here.....',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20))),
+          child: Column(
+            children: [
+              TextField(
+                onChanged: (value) {
+                  context.read<HomeCubit>().getHomeData(search: value);
+                },
+                controller: _searchController,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search),
+                  hintText: 'Search jobs here.....',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  for (final post in state.postList) JobLists(post: post)
-                ],
-              );
-            }
-            return Center(
-              child: LinearProgressIndicator(),
-            );
-          }),
+                ),
+              ),
+              SizedBox(height: 20),
+              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+                if (state is HomeSuccess) {
+                  return Column(
+                    children: [
+                      for (final post in state.postList) JobLists(post: post)
+                    ],
+                  );
+                }
+                return Center(
+                  child: LinearProgressIndicator(),
+                );
+              }),
+            ],
+          ),
         ),
       )),
     );

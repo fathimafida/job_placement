@@ -11,7 +11,7 @@ import 'package:job_placement/features/home/views/viewAllPosts.dart';
 import 'package:job_placement/features/home/widgets/job_list.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

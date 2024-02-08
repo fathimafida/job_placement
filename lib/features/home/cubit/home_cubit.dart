@@ -8,10 +8,11 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
-  void getHomeData() async {
+  void getHomeData({String? search}) async {
     emit(HomeLoading());
     try {
-      final response = await dioClient.get("/job/posts");
+      final response = await dioClient.get("/job/posts",
+          queryParameters: {if (search != null) "search": search});
       final List<Post> postList = [];
       for (final post in response.data) {
         postList.add(Post.fromJson(post));
