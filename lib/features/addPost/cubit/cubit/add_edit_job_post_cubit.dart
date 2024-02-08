@@ -13,6 +13,8 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
       {required String title,
       required String description,
       required String place,
+      required String jobType,
+      required String url,
       XFile? image,
       required String companyName}) async {
     emit(AddEditJobPostLoading());
@@ -22,6 +24,8 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
         "description": description,
         "place": place,
         "companyName": companyName,
+        "jobType": jobType,
+        "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
             image.path,
@@ -49,6 +53,8 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
       required String description,
       required String place,
       required Post post,
+      required String jobType,
+      required String url,
       XFile? image,
       required String companyName}) async {
     emit(AddEditJobPostLoading());
@@ -58,6 +64,8 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
         "description": description,
         "place": place,
         "companyName": companyName,
+        "jobType": jobType,
+        "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
             image.path,
@@ -70,6 +78,7 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
       emit(AddEditJobPostSuccess());
     } on DioException catch (e) {
       print(e);
+      print(e.response?.data?.toString());
 
       emit(AddEditJobPostError(e.toString()));
     } catch (e) {

@@ -7,9 +7,6 @@ import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/cubit/cubit/add_edit_job_post_cubit.dart';
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:job_placement/features/home/models/post.dart';
-import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
-
-import 'description_sheet_field.dart';
 
 class AddEditJobPost extends StatefulWidget {
   const AddEditJobPost({super.key, this.post});
@@ -26,6 +23,8 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
   final _companyNameController = TextEditingController();
   final _placeController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _jobTypeController = TextEditingController();
+  final _urlController = TextEditingController();
   XFile? _selectedImage;
   void _pickImage() async {
     try {
@@ -49,7 +48,8 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
       _companyNameController.text = widget.post!.companyName;
       _placeController.text = widget.post!.place;
       _descriptionController.text = widget.post!.description;
-      // _selectedImage = XFile(widget.post!.image);
+      _jobTypeController.text = widget.post!.jobType;
+      _urlController.text = widget.post!.url;
     }
     super.initState();
   }
@@ -138,16 +138,49 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                 //     },
                 //     descriptionController: _descriptionController),
                 TextFormField(
-                    maxLength: 1000,
+                    maxLength: 5000,
+                    maxLines: 7,
                     onTap: () {},
                     controller: _descriptionController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'description',
+                      alignLabelWithHint: true,
+                      hintText: "description",
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
+                      }
+                      return null;
+                    }),
+                SizedBox(height: 10),
+                TextFormField(
+                    maxLength: 50,
+                    onTap: () {},
+                    controller: _jobTypeController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'jobType',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    }),
+                SizedBox(height: 10),
+                TextFormField(
+                    maxLength: 50,
+                    onTap: () {},
+                    controller: _urlController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'url',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please paste your some url';
                       }
                       return null;
                     }),
@@ -185,6 +218,8 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                                     description: _descriptionController.text,
                                     place: _placeController.text,
                                     companyName: _companyNameController.text,
+                                    jobType: _jobTypeController.text,
+                                    url: _urlController.text,
                                     image: _selectedImage,
                                   )
                               : context.read<AddEditJobPostCubit>().editJobPost(
@@ -193,6 +228,8 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                                     description: _descriptionController.text,
                                     place: _placeController.text,
                                     companyName: _companyNameController.text,
+                                    jobType: _jobTypeController.text,
+                                    url: _urlController.text,
                                     image: _selectedImage,
                                   );
                         }

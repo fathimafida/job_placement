@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_placement/common/utils/utils.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'package:job_placement/features/home/models/post.dart';
 
 import 'web_view_screen.dart';
