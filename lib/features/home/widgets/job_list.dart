@@ -4,7 +4,7 @@ import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
 import 'package:job_placement/features/detailPage/views/job_detail_page.dart';
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
-
+import 'package:intl/intl.dart';
 import 'package:job_placement/features/home/models/post.dart';
 
 class JobLists extends StatefulWidget {
@@ -47,6 +47,8 @@ class _JobListsState extends State<JobLists> {
                         widget.post.companyName,
                         style: applyTextStyle(14, FontWeight.normal),
                       ),
+                      Text(
+                          ' ${DateFormat('yyyy-MM-dd – HH:mm').format(DateTime.parse(widget.post.createdAt))}'),
                       Text(
                         widget.post.place,
                         style: applyTextStyle(14, FontWeight.w100),
