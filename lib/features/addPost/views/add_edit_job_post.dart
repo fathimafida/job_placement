@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last, prefer_const_constructors
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -55,10 +57,11 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.post != null ? "Edit Job Post" : " Add Job Post"),
+        title: Text(widget.post != null ? "Edit Job " : " Add Job "),
       ),
       body: Form(
         key: _formKey,
@@ -83,9 +86,9 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                 ),
                 TextButton.icon(
                     onPressed: _pickImage,
-                    icon: Icon(Icons.image),
+                    icon: const Icon(Icons.image),
                     label: Text("Pick Image")),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                     maxLength: 50,
                     controller: _titleController,
@@ -102,7 +105,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                     maxLength: 50,
                     controller: _companyNameController,
@@ -116,7 +119,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                     maxLength: 50,
                     controller: _placeController,
@@ -130,7 +133,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // DescriptionSheetField(
                 //     onSaved: (String? value) {
                 //       setState(() {
@@ -155,7 +158,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                     maxLength: 50,
                     onTap: () {},
@@ -170,7 +173,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                     maxLength: 50,
                     onTap: () {},
@@ -185,15 +188,15 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       }
                       return null;
                     }),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 BlocConsumer<AddEditJobPostCubit, AddJobPostState>(
                   listener: (context, state) {
                     if (state is AddEditJobPostSuccess) {
                       context.read<HomeCubit>().getHomeData();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: widget.post != null
-                            ? Text("Post Edited Successfully")
-                            : Text("Post Added Successfully"),
+                            ? const Text("Post Edited Successfully")
+                            : const Text("Post Added Successfully"),
                       ));
 
                       context.read<HomeCubit>().getHomeData();
@@ -208,7 +211,7 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                   },
                   builder: (context, state) {
                     if (state is AddEditJobPostLoading) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     return ElevatedButton(
                       onPressed: () {

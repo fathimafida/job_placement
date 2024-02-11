@@ -75,6 +75,7 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
       print("before");
       final response =
           await dioClient.patch("/job/posts/${post.id}/", data: formData);
+      print(response.data);
       emit(AddEditJobPostSuccess());
     } on DioException catch (e) {
       print(e);

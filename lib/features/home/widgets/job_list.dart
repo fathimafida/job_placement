@@ -41,11 +41,11 @@ class _JobListsState extends State<JobLists> {
                     children: [
                       Text(
                         widget.post.title,
-                        style: applyTextStyle(18, FontWeight.bold),
+                        style: applyTextStyle(17, FontWeight.bold),
                       ),
                       Text(
                         widget.post.companyName,
-                        style: applyTextStyle(15, FontWeight.bold),
+                        style: applyTextStyle(14, FontWeight.bold),
                       ),
                       Text(
                         widget.post.place,

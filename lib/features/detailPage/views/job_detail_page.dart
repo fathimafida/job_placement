@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:job_placement/common/utils/utils.dart';
 
@@ -12,7 +14,7 @@ class JobDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Job details"),
+        title: const Text("Job details"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -22,7 +24,7 @@ class JobDetailsPage extends StatelessWidget {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -41,7 +43,7 @@ class JobDetailsPage extends StatelessWidget {
                           //           fit: BoxFit.cover)),
                           // ),
                           CircleAvatar(
-                            radius: 90,
+                            radius: 85,
                             backgroundImage: NetworkImage(
                               post.image,
                             ),
@@ -52,7 +54,7 @@ class JobDetailsPage extends StatelessWidget {
                             style: applyTextStyle(20, FontWeight.bold),
                           ),
                           Text("${post.companyName} - ${post.place}",
-                              style: applyTextStyle(15, FontWeight.normal)),
+                              style: applyTextStyle(14, FontWeight.normal)),
                         ],
                       )),
                       const SizedBox(height: 15),
@@ -61,27 +63,28 @@ class JobDetailsPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Icon(
-                              Icons.shopping_bag,
+                              Icons.business_center,
+                              size: 30,
                               color: Theme.of(context)
                                   .colorScheme
                                   .secondaryContainer,
                             ),
-                            SizedBox(
-                              width: 10,
+                            const SizedBox(
+                              width: 5,
                             ),
                             Text(post.jobType,
-                                style: applyTextStyle(15, FontWeight.bold))
+                                style: applyTextStyle(16, FontWeight.normal))
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 8,
                       ),
                       Text(
                         "Job Description",
                         style: applyTextStyle(20, FontWeight.bold),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       Text(post.description,
                           style: applyTextStyle(16, FontWeight.normal)),
                     ],
@@ -98,10 +101,10 @@ class JobDetailsPage extends StatelessWidget {
                 },
                 child: Text(
                   "Apply Now",
-                  style: applyTextStyle(16, FontWeight.bold),
+                  style: applyTextStyle(20, FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(150, 50),
+                  minimumSize: Size(180, 50),
                   backgroundColor: Color.fromARGB(255, 1, 27, 72),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(

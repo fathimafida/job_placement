@@ -19,7 +19,6 @@ class HomeCubit extends Cubit<HomeState> {
       }
       emit(HomeSuccess(postList.reversed.toList()));
     } catch (e) {
-      print(e);
       emit(HomeError(e.toString()));
     }
   }
@@ -32,12 +31,8 @@ class HomeCubit extends Cubit<HomeState> {
       );
       emit(DeletePostSuccess());
     } on DioException catch (e) {
-      print(e.response?.data);
-      print(e);
-      print(e.error);
       emit(DeletePostError(e.toString()));
     } catch (e) {
-      print(e);
       emit(DeletePostError(e.toString()));
     }
   }

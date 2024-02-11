@@ -6,7 +6,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class DescriptionSheetField extends StatefulWidget {
-  DescriptionSheetField({
+  const DescriptionSheetField({
     super.key,
     required TextEditingController descriptionController,
     required this.onSaved,

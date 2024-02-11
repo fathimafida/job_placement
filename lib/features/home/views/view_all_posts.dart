@@ -16,7 +16,7 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("View All Posts"),
+        title: const Text("All Posts"),
       ),
       body: SafeArea(
           child: Padding(
@@ -32,12 +32,10 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
                   hintText: 'Search jobs here.....',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
                 if (state is HomeSuccess) {
                   return Column(
@@ -46,7 +44,7 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
                     ],
                   );
                 }
-                return Center(
+                return const Center(
                   child: LinearProgressIndicator(),
                 );
               }),

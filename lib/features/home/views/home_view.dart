@@ -7,11 +7,11 @@ import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
 
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
-import 'package:job_placement/features/home/views/viewAllPosts.dart';
+import 'package:job_placement/features/home/views/view_all_posts.dart';
 import 'package:job_placement/features/home/widgets/job_list.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class HomeView extends StatelessWidget {
                           Spacer(),
                           Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(18),
                                 border: Border.all(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -106,10 +106,55 @@ class HomeView extends StatelessWidget {
                           onPressed: () {
                             navigateTO(context, ViewAllPosts());
                           },
-                          label: Text('View all'),
+                          label: Text('Show all'),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                          ),
                           icon: Icon(Icons.arrow_forward),
                         ),
                       ),
+                      SizedBox(height: 18),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.file_upload_outlined,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Upload Your resume",
+                                  style: applyTextStyle(16, FontWeight.bold)),
+                              Text(
+                                  "We'll match you with the best suitable jobs",
+                                  style: applyTextStyle(15, FontWeight.normal))
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 70,
+                          ),
+                          TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.file_upload_outlined,
+                                size: 25,
+                              ),
+                              label: Text("Upload from device",
+                                  style: applyTextStyle(18, FontWeight.bold))),
+                        ],
+                      )
                     ],
                   );
                 }
