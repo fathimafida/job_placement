@@ -116,45 +116,45 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 18),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.file_upload_outlined,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Upload Your resume",
-                                  style: applyTextStyle(16, FontWeight.bold)),
-                              Text(
-                                  "We'll match you with the best suitable jobs",
-                                  style: applyTextStyle(15, FontWeight.normal))
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 70,
-                          ),
-                          TextButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.file_upload_outlined,
-                                size: 25,
-                              ),
-                              label: Text("Upload from device",
-                                  style: applyTextStyle(18, FontWeight.bold))),
-                        ],
-                      )
+                      // Row(
+                      //   children: [
+                      //     Icon(
+                      //       Icons.file_upload_outlined,
+                      //       size: 35,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 15,
+                      //     ),
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Text("Upload Your resume",
+                      //             style: applyTextStyle(16, FontWeight.bold)),
+                      //         Text(
+                      //             "We'll match you with the best suitable jobs",
+                      //             style: applyTextStyle(15, FontWeight.normal))
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 15,
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     SizedBox(
+                      //       width: 70,
+                      //     ),
+                      //     TextButton.icon(
+                      //         onPressed: () {},
+                      //         icon: Icon(
+                      //           Icons.file_upload_outlined,
+                      //           size: 25,
+                      //         ),
+                      //         label: Text("Upload from device",
+                      //             style: applyTextStyle(18, FontWeight.bold))),
+                      //   ],
+                      // )
                     ],
                   );
                 }
