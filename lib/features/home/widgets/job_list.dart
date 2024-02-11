@@ -30,10 +30,17 @@ class _JobListsState extends State<JobLists> {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(widget.post.image),
-                ),
+                Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                        image: DecorationImage(
+                            image: NetworkImage(widget.post.image),
+                            fit: BoxFit.cover))),
                 SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -45,7 +52,7 @@ class _JobListsState extends State<JobLists> {
                       ),
                       Text(
                         widget.post.companyName,
-                        style: applyTextStyle(14, FontWeight.bold),
+                        style: applyTextStyle(15, FontWeight.bold),
                       ),
                       Text(
                         widget.post.place,
