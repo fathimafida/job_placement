@@ -45,14 +45,18 @@ class _JobListsState extends State<JobLists> {
                       ),
                       Text(
                         widget.post.companyName,
-                        style: applyTextStyle(14, FontWeight.normal),
+                        style: applyTextStyle(15, FontWeight.bold),
                       ),
-                      Text(
-                          ' ${DateFormat('yyyy-MM-dd – HH:mm').format(DateTime.parse(widget.post.createdAt))}'),
                       Text(
                         widget.post.place,
-                        style: applyTextStyle(14, FontWeight.w100),
+                        style: applyTextStyle(14, FontWeight.w400),
                       ),
+                      Text(
+                          DateFormat('dd-MM-yyyy  hh:mm a')
+                              .format(DateTime.parse(
+                            widget.post.createdAt,
+                          ).toLocal()),
+                          style: applyTextStyle(12, FontWeight.w200)),
                     ],
                   ),
                 ),

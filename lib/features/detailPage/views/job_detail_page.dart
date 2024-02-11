@@ -29,16 +29,22 @@ class JobDetailsPage extends StatelessWidget {
                       Center(
                           child: Column(
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(),
-                                image: DecorationImage(
-                                    image: NetworkImage(post.image),
-                                    fit: BoxFit.cover)),
+                          // Container(
+                          //   padding: EdgeInsets.all(10),
+                          //   height: 250,
+                          //   width: double.infinity,
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(15),
+                          //       border: Border.all(),
+                          //       image: DecorationImage(
+                          //           image: NetworkImage(post.image),
+                          //           fit: BoxFit.cover)),
+                          // ),
+                          CircleAvatar(
+                            radius: 90,
+                            backgroundImage: NetworkImage(
+                              post.image,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Text(

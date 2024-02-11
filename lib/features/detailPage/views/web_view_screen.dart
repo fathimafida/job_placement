@@ -49,8 +49,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ),
       body: SafeArea(
           child: isLoading
-              ? LinearProgressIndicator(
-                  value: currentProgress,
+              ? Center(
+                  child: CircularProgressIndicator(
+                    value: currentProgress,
+                  ),
                 )
               : WebViewWidget(
                   controller: _controller,
