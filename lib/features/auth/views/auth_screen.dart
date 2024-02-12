@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
+import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
+
+import 'package:job_placement/features/home/views/home_view.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -10,8 +14,18 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: "20mcs24@meaec.edu.in");
+  final _passwordController = TextEditingController(text: "1234");
+
+  void _onLogin() {
+    if (_formKey.currentState!.validate()) {
+      context.read<AuthCubit>().loginUser(
+          email: _emailController.text, password: _passwordController.text);
+    }
+    _emailController.clear();
+    _passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 },
                 decoration: InputDecoration(
                   hintText: "email",
+                  label: Text("Email"),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30),
@@ -78,9 +93,79 @@ class _AuthScreenState extends State<AuthScreen> {
                 },
                 decoration: InputDecoration(
                   hintText: "password",
+                  label: Text("Password"),
                   border: OutlineInputBorder(),
                 ),
               ),
+              Row(children: [
+                Spacer(),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Forgot Password?",
+                    style: applyTextStyle(16, FontWeight.bold),
+                  ),
+                ),
+              ]),
+              SizedBox(
+                height: (30),
+              ),
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Login Successfully")));
+
+                    navigateTO(context, HomeView());
+                  }
+                  if (state is AuthError) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(state.message)));
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: _onLogin,
+                    child: Text(
+                      "Login",
+                      style: applyTextStyle(20, FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.tertiaryContainer,
+                        minimumSize: Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Text(
+                    "Don't have an account?",
+                    style: applyTextStyle(18, FontWeight.normal),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Sign Up",
+                        style: applyTextStyle(18, FontWeight.normal),
+                      )),
+                ],
+              )
             ],
           ),
         )),
