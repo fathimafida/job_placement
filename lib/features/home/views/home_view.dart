@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
 
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
+import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
 
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:job_placement/features/home/views/view_all_posts.dart';
@@ -20,10 +22,11 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AuthCubit>().state as AuthSuccess).user;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8.0),
           child: RefreshIndicator(
             onRefresh: () async {
               context.read<HomeCubit>().getHomeData();
