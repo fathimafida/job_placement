@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
 
 import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
-import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
 
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:job_placement/features/home/views/view_all_posts.dart';
@@ -21,7 +20,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final user = (context.read<AuthCubit>().state as AuthSuccess).user;
+    // final user = (context.read<AuthCubit>().state as AuthSuccess).user;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -47,6 +46,7 @@ class _HomeViewState extends State<HomeView> {
                 }
               }, builder: (context, state) {
                 if (state is HomeSuccess) {
+                  final first3Posts = state.postList.take(3).toList();
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -102,9 +102,7 @@ class _HomeViewState extends State<HomeView> {
                         height: 10,
                       ),
                       Column(children: [
-                        JobLists(post: state.postList[0]),
-                        JobLists(post: state.postList[1]),
-                        JobLists(post: state.postList[2]),
+                        for (var post in first3Posts) JobLists(post: post),
                       ]),
                       SizedBox(height: 10),
                       Align(

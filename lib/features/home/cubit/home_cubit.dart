@@ -19,6 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
       emit(HomeSuccess(postList.reversed.toList()));
     } catch (e) {
+      print(e);
       emit(HomeError(e.toString()));
     }
   }

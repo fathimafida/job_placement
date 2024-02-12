@@ -20,7 +20,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(RegisterSuccess(User.fromJson(resp.data)));
     } catch (e) {
       print(e);
-      emit(RegisterError("Email already exist"));
+      emit(RegisterError(e.toString()));
     }
   }
 }

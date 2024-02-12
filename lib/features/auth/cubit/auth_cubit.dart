@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:job_placement/common/utils/dioClient.dart';
 import 'package:job_placement/features/auth/models/user.dart';
 import 'package:meta/meta.dart';
@@ -12,10 +13,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
 
     try {
-      print("before");
-      final user = await dioClient
-          .post("/job/login/", data: {"email": email, "password": password});
-      print("after");
+      final user = await Dio().post("https://stuverse.in/api/user/login/",
+          data: {"email": email, "password": password});
+
       emit(AuthSuccess(User.fromJson(user.data)));
     } catch (e) {
       print(e);

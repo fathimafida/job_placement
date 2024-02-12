@@ -183,9 +183,14 @@ class _AddEditJobPostState extends State<AddEditJobPost> {
                       labelText: 'url',
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please paste your some url';
+                      //regex validation of url
+                      final pattern =
+                          r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
+                      final regExp = RegExp(pattern);
+                      if (!regExp.hasMatch(value!)) {
+                        return "Please enter a valid url";
                       }
+
                       return null;
                     }),
                 const SizedBox(height: 30),

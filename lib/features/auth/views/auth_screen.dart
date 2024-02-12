@@ -5,26 +5,33 @@ import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
 import 'package:job_placement/features/auth/views/register_screen.dart';
 
 import 'package:job_placement/features/home/views/home_view.dart';
+import 'package:logman/logman.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
-
-  @override
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Logman.instance.attachOverlay(
+        context: context,
+      );
+    });
+  }
+
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController(text: "20mcs24@meaec.edu.in");
-  final _passwordController = TextEditingController(text: "1234");
+  final _passwordController = TextEditingController(text: "123456");
 
   void _onLogin() {
     if (_formKey.currentState!.validate()) {
       context.read<AuthCubit>().loginUser(
           email: _emailController.text, password: _passwordController.text);
     }
-    _emailController.clear();
-    _passwordController.clear();
   }
 
   @override
