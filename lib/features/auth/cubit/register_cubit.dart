@@ -13,11 +13,14 @@ class RegisterCubit extends Cubit<RegisterState> {
       required String password}) async {
     emit(RegisterLoading());
     try {
+      print("before");
       final resp = await dioClient.post("/job/register/",
           data: {"name": name, "email": email, "password": password});
+      print("after");
       emit(RegisterSuccess(User.fromJson(resp.data)));
     } catch (e) {
-      emit(RegisterError(e.toString()));
+      print(e);
+      emit(RegisterError("Email already exist"));
     }
   }
 }

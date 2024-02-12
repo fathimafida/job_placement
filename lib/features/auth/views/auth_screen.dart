@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
 import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
+import 'package:job_placement/features/auth/views/register_screen.dart';
 
 import 'package:job_placement/features/home/views/home_view.dart';
 
@@ -159,7 +160,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     style: applyTextStyle(18, FontWeight.normal),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateTO(context, RegisterScreen());
+                      },
                       child: Text(
                         "Sign Up",
                         style: applyTextStyle(18, FontWeight.normal),
