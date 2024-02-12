@@ -26,14 +26,7 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
             children: [
               TextField(
                 onChanged: (value) {
-                  // Call the appropriate method based on whether the search field is empty or not.
-                  if (value.isEmpty) {
-                    // When search is cleared, fetch all data again.
-                    context.read<HomeCubit>().getHomeData();
-                  } else {
-                    // When there is a search term, fetch filtered data.
-                    context.read<HomeCubit>().getHomeData(search: value);
-                  }
+                  context.read<HomeCubit>().getHomeData(search: value);
                 },
                 controller: _searchController,
                 decoration: InputDecoration(
