@@ -104,7 +104,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   onPressed: () {},
                   child: Text(
                     "Forgot Password?",
-                    style: applyTextStyle(16, FontWeight.bold),
+                    style: applyTextStyle(18, FontWeight.bold),
                   ),
                 ),
               ]),

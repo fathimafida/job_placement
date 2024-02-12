@@ -28,6 +28,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                "Enter your email",
+                style: applyTextStyle(20, FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter a valid email";
+                  } else if (!value.contains('@') || !value.contains('.')) {
+                    return "Please enter a valid email";
+                  }
+                  return null;
+                },
+                onTapOutside: (event) {
+                  FocusScope.of(context).unfocus();
+                },
+                decoration: InputDecoration(
+                    hintText: "email",
+                    label: Text("Email"),
+                    border: OutlineInputBorder()),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Enter your username",
+                style: applyTextStyle(20, FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _userController,
                 validator: (value) {
@@ -48,31 +83,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                controller: _emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a valid email";
-                  } else if (!value.contains('@') || !value.contains('.')) {
-                    return "Please enter a valid email";
-                  }
-                  return null;
-                },
-                onTapOutside: (event) {
-                  FocusScope.of(context).unfocus();
-                },
-                decoration: InputDecoration(
-                  hintText: "email",
-                  label: Text("Email"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
+              Text(
+                "Enter your password",
+                style: applyTextStyle(20, FontWeight.bold),
               ),
               SizedBox(
                 height: 10,
@@ -102,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {},
                   child: Text(
                     "Forgot Password?",
-                    style: applyTextStyle(16, FontWeight.bold),
+                    style: applyTextStyle(18, FontWeight.bold),
                   ),
                 ),
               ]),
