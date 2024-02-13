@@ -154,9 +154,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                 backgroundColor: Theme.of(context)
                                     .colorScheme
                                     .primaryContainer,
-                                foregroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .tertiaryContainer,
+                                foregroundColor:
+                                    Theme.of(context).colorScheme.onBackground,
                                 minimumSize: Size(double.infinity, 50),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20))),

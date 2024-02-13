@@ -32,7 +32,7 @@ class _MainAppState extends State<MainApp> {
       child: MaterialApp(
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           home: AuthScreen()),
     );

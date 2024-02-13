@@ -105,8 +105,9 @@ class JobDetailsPage extends StatelessWidget {
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(180, 50),
-                  backgroundColor: Color.fromARGB(255, 1, 27, 72),
-                  foregroundColor: Colors.white,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer,
+                  foregroundColor: Theme.of(context).colorScheme.onBackground,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),

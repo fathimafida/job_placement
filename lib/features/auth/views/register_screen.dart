@@ -161,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           backgroundColor:
                               Theme.of(context).colorScheme.primaryContainer,
                           foregroundColor:
-                              Theme.of(context).colorScheme.tertiaryContainer,
+                              Theme.of(context).colorScheme.onBackground,
                           minimumSize: Size(double.infinity, 50),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),

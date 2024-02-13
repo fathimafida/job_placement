@@ -63,7 +63,7 @@ class _JobListsState extends State<JobLists> {
                               .format(DateTime.parse(
                             widget.post.createdAt,
                           ).toLocal()),
-                          style: applyTextStyle(12, FontWeight.w200)),
+                          style: applyTextStyle(12, FontWeight.w100)),
                     ],
                   ),
                 ),
