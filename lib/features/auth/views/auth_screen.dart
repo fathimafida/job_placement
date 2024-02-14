@@ -172,7 +172,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Text(
                             "Don't have an account?",
-                            style: applyTextStyle(18, FontWeight.normal),
+                            style: applyTextStyle(16, FontWeight.normal),
                           ),
                           TextButton(
                               onPressed: () {
