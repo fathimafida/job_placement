@@ -69,8 +69,8 @@ class _HomeViewState extends State<HomeView> {
                               navigateTO(context, AddEditJobPost());
                             },
                             child: Container(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
-                              width: 55,
+                              padding: EdgeInsets.only(top: 3, bottom: 3),
+                              width: 57,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Theme.of(context)

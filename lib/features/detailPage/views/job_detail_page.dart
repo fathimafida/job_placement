@@ -51,7 +51,7 @@ class JobDetailsPage extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             post.title,
-                            style: applyTextStyle(20, FontWeight.bold),
+                            style: applyTextStyle(18, FontWeight.bold),
                           ),
                           Text("${post.companyName} - ${post.place}",
                               style: applyTextStyle(14, FontWeight.normal)),
@@ -64,7 +64,7 @@ class JobDetailsPage extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.business_center,
-                              size: 30,
+                              size: 25,
                               color: Theme.of(context)
                                   .colorScheme
                                   .secondaryContainer,
@@ -82,11 +82,11 @@ class JobDetailsPage extends StatelessWidget {
                       ),
                       Text(
                         "Job Description",
-                        style: applyTextStyle(20, FontWeight.bold),
+                        style: applyTextStyle(18, FontWeight.bold),
                       ),
                       const SizedBox(height: 5),
                       Text(post.description,
-                          style: applyTextStyle(16, FontWeight.normal)),
+                          style: applyTextStyle(14, FontWeight.normal)),
                     ],
                   ),
                 ),

@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       Text(
                         "Enter your email",
-                        style: applyTextStyle(18, FontWeight.bold),
+                        style: applyTextStyle(16, FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -88,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       Text(
                         "Enter your password",
-                        style: applyTextStyle(18, FontWeight.bold),
+                        style: applyTextStyle(16, FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -118,7 +118,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           onPressed: () {},
                           child: Text(
                             "Forgot Password?",
-                            style: applyTextStyle(18, FontWeight.bold),
+                            style: applyTextStyle(15, FontWeight.bold),
                           ),
                         ),
                       ]),
@@ -148,7 +148,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             onPressed: _onLogin,
                             child: Text(
                               "Login",
-                              style: applyTextStyle(20, FontWeight.bold),
+                              style: applyTextStyle(18, FontWeight.bold),
                             ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context)
@@ -162,17 +162,14 @@ class _AuthScreenState extends State<AuthScreen> {
                           );
                         },
                       ),
-                      SizedBox(
-                        height: 6,
-                      ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 50,
+                          const SizedBox(
+                            width: 55,
                           ),
                           Text(
                             "Don't have an account?",
-                            style: applyTextStyle(16, FontWeight.normal),
+                            style: applyTextStyle(14, FontWeight.normal),
                           ),
                           TextButton(
                               onPressed: () {
@@ -180,7 +177,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               },
                               child: Text(
                                 "Sign Up",
-                                style: applyTextStyle(18, FontWeight.normal),
+                                style: applyTextStyle(14, FontWeight.normal),
                               )),
                         ],
                       ),

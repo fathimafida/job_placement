@@ -4,8 +4,6 @@ import 'logman_interceptor.dart';
 
 final bool isEmulator = false;
 final dioClient = Dio(BaseOptions(
-  baseUrl: isEmulator
-      ? "http://10.0.0.2:8000"
-      : 'https://521f-59-93-232-36.ngrok-free.app',
+  baseUrl: isEmulator ? "http://10.0.0.2:8000" : 'http://localhost:8000',
 ))
   ..interceptors.add(LogmanDioInterceptor());
