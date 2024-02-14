@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       Text(
                         "Enter your email",
-                        style: applyTextStyle(20, FontWeight.bold),
+                        style: applyTextStyle(18, FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -88,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       Text(
                         "Enter your password",
-                        style: applyTextStyle(20, FontWeight.bold),
+                        style: applyTextStyle(18, FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
