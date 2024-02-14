@@ -55,72 +55,68 @@ class _HomeViewState extends State<HomeView> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Find Your Dream',
-                                style: applyGoogleFontToText(
-                                  20,
-                                ),
-                              ),
-                              Text(
-                                'Job With Us ',
-                                style: applyGoogleFontToText(
-                                  20,
-                                ),
-                              ),
+                              Text('Find Your Dream',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium),
+                              Text('Job With Us ',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium),
                             ],
                           ),
                           Spacer(),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                border: Border.all(
+                          InkWell(
+                            onTap: () {
+                              navigateTO(context, AddEditJobPost());
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(top: 2, bottom: 2),
+                              width: 55,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Theme.of(context)
                                       .colorScheme
-                                      .secondaryContainer,
-                                )),
-                            child: IconButton(
-                              onPressed: () {
-                                navigateTO(context, AddEditJobPost());
-                              },
-                              icon: Icon(Icons.add),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
+                                      .primary
+                                      .withOpacity(0.3),
+                                  border: Border.all()),
+                              child: Icon(
+                                Icons.add,
+                                size: 20,
+                              ),
                             ),
                           )
                         ],
                       ),
                       Divider(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Featured Jobs',
-                        style: applyGoogleFontToText(20),
-                      ),
-                      SizedBox(
-                        height: 10,
+                      Row(
+                        children: [
+                          Text(
+                            'Featured Jobs',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          Spacer(),
+                          TextButton.icon(
+                            onPressed: () {
+                              navigateTO(context, ViewAllPosts());
+                            },
+                            label: Text(
+                              'Show all',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            style: TextButton.styleFrom(
+                              foregroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                            ),
+                            icon: Icon(
+                              Icons.arrow_forward,
+                              size: 16,
+                            ),
+                          ),
+                        ],
                       ),
                       Column(children: [
                         for (var post in first3Posts) JobLists(post: post),
                       ]),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.center,
-                        child: TextButton.icon(
-                          onPressed: () {
-                            navigateTO(context, ViewAllPosts());
-                          },
-                          label: Text('Show all'),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer,
-                          ),
-                          icon: Icon(Icons.arrow_forward),
-                        ),
-                      ),
-                      SizedBox(height: 18),
                     ],
                   );
                 }
