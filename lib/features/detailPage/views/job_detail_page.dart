@@ -101,7 +101,7 @@ class JobDetailsPage extends StatelessWidget {
                 },
                 child: Text(
                   "Apply Now",
-                  style: applyTextStyle(20, FontWeight.bold),
+                  style: applyTextStyle(18, FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(180, 50),

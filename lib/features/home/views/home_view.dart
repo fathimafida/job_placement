@@ -70,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                             },
                             child: Container(
                               padding: EdgeInsets.only(top: 3, bottom: 3),
-                              width: 57,
+                              width: 55,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Theme.of(context)
