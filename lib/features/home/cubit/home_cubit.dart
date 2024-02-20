@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   void getHomeData({String? search}) async {
     emit(HomeLoading());
     try {
-      final response = await dioClient.get("/job/posts",
+      final response = await dioClient.get("/posts",
           queryParameters: {if (search != null) "search": search});
       final List<Post> postList = [];
       for (final post in response.data) {
