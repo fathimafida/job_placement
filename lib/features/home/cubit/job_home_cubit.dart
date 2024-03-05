@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:job_placement/common/utils/dioClient.dart';
 import 'package:job_placement/features/home/models/job_post.dart';
 import 'package:meta/meta.dart';
 
@@ -10,14 +11,14 @@ class JobHomeCubit extends Cubit<JobHomeState> {
   void getJobHomeData() async {
     emit(JobHomeLoading());
     try {
-      final response = await Dio().get(
-        "http://127.0.0.1:8000/job/posts",
+      final response = await dioClient.get(
+        "/job/home/",
       );
       final List<JobPost> latestJobs = [
-        for (final post in response.data['latest_jobs']) JobPost.fromJson(post),
+        for (final post in response.data['latest3Jobs']) JobPost.fromJson(post),
       ];
       final List<JobPost> bestInternships = [
-        for (final post in response.data['best_internships'])
+        for (final post in response.data['best3Internships'])
           JobPost.fromJson(post),
       ];
 

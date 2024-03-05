@@ -5,6 +5,7 @@ import 'package:job_placement/features/add_edit_job_post/cubit/cubit/manage_job_
 
 import 'package:job_placement/features/home/cubit/job_home_cubit.dart';
 import 'package:job_placement/features/home/widgets/job_list.dart';
+import 'package:logman/logman.dart';
 
 class JobHomeScreen extends StatefulWidget {
   const JobHomeScreen({super.key});
@@ -18,6 +19,11 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
   void initState() {
     context.read<JobHomeCubit>().getJobHomeData();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Logman.instance.attachOverlay(
+        context: context,
+      );
+    });
   }
 
   @override

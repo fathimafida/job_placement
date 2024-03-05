@@ -42,7 +42,7 @@ class _JobListTileState extends State<JobListTile> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           image: DecorationImage(
-                              image: NetworkImage(widget.post.image),
+                              image: NetworkImage(widget.post.image ?? ""),
                               fit: BoxFit.cover))),
                 ),
                 const SizedBox(width: 10),
@@ -51,9 +51,9 @@ class _JobListTileState extends State<JobListTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.post.title,
+                        widget.post.title ?? "no title",
                       ),
-                      Text(widget.post.companyName),
+                      Text(widget.post.companyName ?? "no company name"),
                       Row(
                         children: [
                           Icon(
@@ -65,7 +65,7 @@ class _JobListTileState extends State<JobListTile> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            widget.post.place,
+                            widget.post.place ?? "no place",
                           ),
                         ],
                       ),
@@ -73,7 +73,7 @@ class _JobListTileState extends State<JobListTile> {
                         alignment: Alignment.bottomRight,
                         child: Text(
                           CommonUtils.relativeTime(
-                            DateTime.parse(widget.post.createdAt),
+                            widget.post.createdAt,
                           ),
                         ),
                       )

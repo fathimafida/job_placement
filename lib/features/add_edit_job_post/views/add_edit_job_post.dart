@@ -48,11 +48,11 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
   @override
   void initState() {
     if (widget.post != null) {
-      _titleController.text = widget.post!.title;
-      _companyNameController.text = widget.post!.companyName;
-      _placeController.text = widget.post!.place;
-      _descriptionController.text = widget.post!.description;
-      _urlController.text = widget.post!.url;
+      _titleController.text = widget.post!.title ?? "";
+      _companyNameController.text = widget.post!.companyName ?? "";
+      _placeController.text = widget.post!.place ?? "";
+      _descriptionController.text = widget.post!.description ?? "";
+      _urlController.text = widget.post!.url ?? "";
       _selectedJobType = widget.post!.jobType;
       _selectedJobLocationType = widget.post!.jobLocationType;
     }
@@ -84,7 +84,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       backgroundImage: _selectedImage != null
                           ? FileImage(File(_selectedImage!.path))
                           : widget.post?.image != null
-                              ? NetworkImage(widget.post!.image)
+                              ? NetworkImage(widget.post!.image ?? "")
                                   as ImageProvider
                               : null,
                     ),
@@ -366,7 +366,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                                       image: _selectedImage,
                                     )
                                 : context.read<ManageJobCubit>().editJob(
-                                      id: widget.post!.id,
+                                      id: widget.post!.id!,
                                       title: _titleController.text,
                                       description: _descriptionController.text,
                                       place: _placeController.text,

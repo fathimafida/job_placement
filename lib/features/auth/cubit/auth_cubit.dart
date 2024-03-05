@@ -13,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
 
     try {
-      final user = await Dio().post("https://stuverse.in/api/user/login/",
+      final user = await dioClient.post("https://stuverse.in/api/user/login/",
           data: {"email": email, "password": password});
 
       emit(AuthSuccess(User.fromJson(user.data)));

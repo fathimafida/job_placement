@@ -45,12 +45,12 @@ class JobDetailsPage extends StatelessWidget {
                           CircleAvatar(
                             radius: 85,
                             backgroundImage: NetworkImage(
-                              post.image,
+                              post.image ?? "",
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            post.title,
+                            post.title ?? "",
                             style: applyTextStyle(18, FontWeight.bold),
                           ),
                           Text("${post.companyName} - ${post.place}",
@@ -72,7 +72,7 @@ class JobDetailsPage extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text(post.jobType,
+                            Text(post.jobType ?? '',
                                 style: applyTextStyle(16, FontWeight.normal))
                           ],
                         ),
@@ -85,7 +85,7 @@ class JobDetailsPage extends StatelessWidget {
                         style: applyTextStyle(18, FontWeight.bold),
                       ),
                       const SizedBox(height: 5),
-                      Text(post.description,
+                      Text(post.description ?? "",
                           style: applyTextStyle(14, FontWeight.normal)),
                     ],
                   ),
@@ -96,7 +96,7 @@ class JobDetailsPage extends StatelessWidget {
                   navigateTO(
                       context,
                       WebViewScreen(
-                        url: post.url,
+                        url: post.url ?? "",
                       ));
                 },
                 child: Text(
