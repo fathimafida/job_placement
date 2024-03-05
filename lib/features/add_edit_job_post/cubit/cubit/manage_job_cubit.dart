@@ -35,7 +35,8 @@ class ManageJobCubit extends Cubit<ManageJobState> {
           )
       });
 
-      final response = await dioClient.post("/job/posts/", data: formData);
+      final response =
+          await Dio().post("http://127.0.0.1:8000/job/posts", data: formData);
 
       print(response.data);
 
@@ -43,7 +44,6 @@ class ManageJobCubit extends Cubit<ManageJobState> {
         message: "Successfully added job post",
       ));
     } on DioException catch (e) {
-      print(e);
       print(e.response?.data?.toString());
       emit(ManageJobError(e.toString()));
     } catch (e) {
@@ -79,8 +79,8 @@ class ManageJobCubit extends Cubit<ManageJobState> {
           )
       });
       print("before");
-      final response =
-          await dioClient.patch("/job/posts/${id}/", data: formData);
+      final response = await Dio()
+          .patch("http://127.0.0.1:8000/job/posts/${id}/", data: formData);
       print(response.data);
       emit(ManageJobSuccess(
         message: "Successfully edited job post",
@@ -101,8 +101,8 @@ class ManageJobCubit extends Cubit<ManageJobState> {
   void deleteJob({required int id}) async {
     emit(ManageJobLoading());
     try {
-      await dioClient.delete(
-        "/job/posts/$id/",
+      await Dio().delete(
+        "http://127.0.0.1:8000/job/posts/$id/",
       );
       emit(ManageJobSuccess(
         message: "Successfully deleted job post",

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:job_placement/features/home/cubit/home_cubit.dart';
+
+import 'package:job_placement/features/home/cubit/job_home_cubit.dart';
+
 import 'package:job_placement/features/home/widgets/job_list.dart';
 
 class ViewAllPosts extends StatefulWidget {
@@ -26,7 +28,7 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
             children: [
               TextField(
                 onChanged: (value) {
-                  context.read<HomeCubit>().getHomeData(search: value);
+                  context.read<JobHomeCubit>().getJobHomeData();
                 },
                 controller: _searchController,
                 decoration: InputDecoration(
@@ -36,11 +38,13 @@ class _ViewAllPostsState extends State<ViewAllPosts> {
                 ),
               ),
               const SizedBox(height: 20),
-              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-                if (state is HomeSuccess) {
+              BlocBuilder<JobHomeCubit, JobHomeState>(
+                  builder: (context, state) {
+                if (state is JobHomeSuccess) {
                   return Column(
                     children: [
-                      for (final post in state.postList) JobLists(post: post)
+                      for (final post in state.latestJobs)
+                        JobListTile(post: post)
                     ],
                   );
                 }

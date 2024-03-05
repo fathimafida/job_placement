@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:job_placement/common/utils/utils.dart';
-import 'package:job_placement/features/add_edit_job_post/views/add_edit_job_post.dart';
-import 'package:job_placement/features/detailPage/views/job_detail_page.dart';
-import 'package:job_placement/features/home/cubit/home_cubit.dart';
-import 'package:intl/intl.dart';
+import 'package:job_placement/common/utils/common_utils.dart';
 import 'package:job_placement/features/home/models/job_post.dart';
 
-class JobLists extends StatefulWidget {
-  const JobLists({
+class JobListTile extends StatefulWidget {
+  const JobListTile({
     super.key,
     required this.post,
   });
   final JobPost post;
 
   @override
-  State<JobLists> createState() => _JobListsState();
+  State<JobListTile> createState() => _JobListTileState();
 }
 
-class _JobListsState extends State<JobLists> {
+class _JobListTileState extends State<JobListTile> {
   @override
   Widget build(BuildContext context) {
+    // final user = context.read<CoreCubit>().state.user;
     return InkWell(
       onTap: () {
-        navigateTO(context, JobDetailsPage(post: widget.post));
+        // context.push(
+        //   JobRoutes.jobDetail,
+        //   extra: widget.post,
+        // );
       },
       child: Card(
+        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.6),
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -37,8 +37,8 @@ class _JobListsState extends State<JobLists> {
                 Card(
                   elevation: 5,
                   child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 55,
+                      width: 55,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           image: DecorationImage(
@@ -52,92 +52,36 @@ class _JobListsState extends State<JobLists> {
                     children: [
                       Text(
                         widget.post.title,
-                        style: applyTextStyle(14, FontWeight.bold),
                       ),
-                      Text(
-                        widget.post.companyName,
-                        style: applyTextStyle(12, FontWeight.normal),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      Text(widget.post.companyName),
                       Row(
                         children: [
                           Icon(
                             Icons.location_on_outlined,
-                            size: 12,
+                            size: 14,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             widget.post.place,
-                            style: applyTextStyle(11, FontWeight.normal),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                          DateFormat('dd-MM-yyyy  hh:mm a')
-                              .format(DateTime.parse(
-                            widget.post.createdAt,
-                          ).toLocal()),
-                          style: applyTextStyle(10, FontWeight.w100)),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          CommonUtils.relativeTime(
+                            DateTime.parse(widget.post.createdAt),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
-                PopupMenuButton(
-                    iconSize: 15,
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                            textStyle: TextStyle(fontSize: 15),
-                            onTap: () {
-                              navigateTO(
-                                  context,
-                                  AddEditJobPostScreen(
-                                    post: widget.post,
-                                  ));
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.edit_outlined),
-                                SizedBox(width: 8),
-                                Text('Edit'),
-                              ],
-                            )),
-                        PopupMenuItem(
-                          onTap: () {
-                            context
-                                .read<HomeCubit>()
-                                .deletePost(id: widget.post.id);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.delete_outline),
-                              SizedBox(width: 8),
-                              Text('Delete'),
-                            ],
-                          ),
-                        ),
-                        const PopupMenuItem(
-                            child: Row(
-                          children: [
-                            Icon(Icons.bookmark_outline),
-                            SizedBox(width: 8),
-                            Text('Save'),
-                          ],
-                        )),
-                        const PopupMenuItem(
-                            child: Row(
-                          children: [
-                            Icon(Icons.flag_outlined),
-                            SizedBox(width: 8),
-                            Text('Report '),
-                          ],
-                        )),
-                      ];
-                    }),
+                // if (user?.type == UserTypes.ADMIN ||
+                //     user?.type == UserTypes.FACULTY)
               ],
             ),
           ]),
