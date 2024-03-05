@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/app_theme.dart';
-import 'package:job_placement/features/addPost/cubit/cubit/add_edit_job_post_cubit.dart';
+import 'package:job_placement/features/add_edit_job_post/cubit/cubit/manage_job_cubit.dart';
 import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
 import 'package:job_placement/features/auth/cubit/register_cubit.dart';
 import 'package:job_placement/features/auth/views/auth_screen.dart';
@@ -25,7 +25,7 @@ class _MainAppState extends State<MainApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeCubit()..getHomeData()),
-        BlocProvider(create: (context) => AddEditJobPostCubit()),
+        BlocProvider(create: (context) => ManageJobCubit()),
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => RegisterCubit()),
       ],
@@ -34,7 +34,7 @@ class _MainAppState extends State<MainApp> {
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
-          home: AuthScreen()),
+          home: HomeView()),
     );
   }
 }

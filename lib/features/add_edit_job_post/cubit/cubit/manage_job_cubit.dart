@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_placement/common/utils/dioClient.dart';
-import 'package:job_placement/features/home/models/post.dart';
 
-part 'add_job_edit_post_state.dart';
+part 'manage_job_state.dart';
 
-class AddEditJobPostCubit extends Cubit<AddJobPostState> {
-  AddEditJobPostCubit() : super(AddEditJobPostInitial());
-  void addJobPost(
+class ManageJobCubit extends Cubit<ManageJobState> {
+  ManageJobCubit() : super(ManageJobInitial());
+
+  void addJob(
       {required String title,
       required String description,
       required String place,
       required String jobType,
+      required String jobLocationType,
       required String url,
       XFile? image,
       required String companyName}) async {
-    emit(AddEditJobPostLoading());
+    emit(ManageJobLoading());
     try {
       final formData = FormData.fromMap({
         "title": title,
@@ -25,6 +26,7 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
         "place": place,
         "companyName": companyName,
         "jobType": jobType,
+        "jobLocationType": jobLocationType,
         "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
@@ -37,27 +39,30 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
 
       print(response.data);
 
-      emit(AddEditJobPostSuccess());
+      emit(ManageJobSuccess(
+        message: "Successfully added job post",
+      ));
     } on DioException catch (e) {
       print(e);
       print(e.response?.data?.toString());
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
     } catch (e) {
       print(e);
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
     }
   }
 
-  void editJobPost(
+  void editJob(
       {required String title,
       required String description,
       required String place,
-      required Post post,
+      required int id,
       required String jobType,
+      required String jobLocationType,
       required String url,
       XFile? image,
       required String companyName}) async {
-    emit(AddEditJobPostLoading());
+    emit(ManageJobLoading());
     try {
       final formData = FormData.fromMap({
         "title": title,
@@ -65,6 +70,7 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
         "place": place,
         "companyName": companyName,
         "jobType": jobType,
+        "jobLocationType": jobLocationType,
         "url": url,
         if (image != null)
           "image": await MultipartFile.fromFile(
@@ -74,17 +80,38 @@ class AddEditJobPostCubit extends Cubit<AddJobPostState> {
       });
       print("before");
       final response =
-          await dioClient.patch("/job/posts/${post.id}/", data: formData);
+          await dioClient.patch("/job/posts/${id}/", data: formData);
       print(response.data);
-      emit(AddEditJobPostSuccess());
+      emit(ManageJobSuccess(
+        message: "Successfully edited job post",
+      ));
     } on DioException catch (e) {
       print(e);
       print(e.response?.data?.toString());
 
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(
+        e.toString(),
+      ));
     } catch (e) {
       print(e);
-      emit(AddEditJobPostError(e.toString()));
+      emit(ManageJobError(e.toString()));
+    }
+  }
+
+  void deleteJob({required int id}) async {
+    emit(ManageJobLoading());
+    try {
+      await dioClient.delete(
+        "/job/posts/$id/",
+      );
+      emit(ManageJobSuccess(
+        message: "Successfully deleted job post",
+      ));
+    } catch (e) {
+      print(e);
+      emit(ManageJobError(
+        "Failed to delete job post",
+      ));
     }
   }
 }

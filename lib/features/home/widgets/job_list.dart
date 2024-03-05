@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
-import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
+import 'package:job_placement/features/add_edit_job_post/views/add_edit_job_post.dart';
 import 'package:job_placement/features/detailPage/views/job_detail_page.dart';
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:intl/intl.dart';
-import 'package:job_placement/features/home/models/post.dart';
+import 'package:job_placement/features/home/models/job_post.dart';
 
 class JobLists extends StatefulWidget {
   const JobLists({
     super.key,
     required this.post,
   });
-  final Post post;
+  final JobPost post;
 
   @override
   State<JobLists> createState() => _JobListsState();
@@ -95,7 +95,7 @@ class _JobListsState extends State<JobLists> {
                             onTap: () {
                               navigateTO(
                                   context,
-                                  AddEditJobPost(
+                                  AddEditJobPostScreen(
                                     post: widget.post,
                                   ));
                             },

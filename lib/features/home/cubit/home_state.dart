@@ -8,7 +8,7 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeSuccess extends HomeState {
-  final List<Post> postList;
+  final List<JobPost> postList;
   HomeSuccess(this.postList);
 }
 

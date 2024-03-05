@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_placement/common/utils/utils.dart';
 
-import 'package:job_placement/features/addPost/views/add_edit_job_post.dart';
+import 'package:job_placement/features/add_edit_job_post/views/add_edit_job_post.dart';
 
 import 'package:job_placement/features/home/cubit/home_cubit.dart';
 import 'package:job_placement/features/home/views/view_all_posts.dart';
@@ -66,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
                           Spacer(),
                           InkWell(
                             onTap: () {
-                              navigateTO(context, AddEditJobPost());
+                              navigateTO(context, AddEditJobPostScreen());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top: 3, bottom: 3),

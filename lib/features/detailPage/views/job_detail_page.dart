@@ -3,13 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:job_placement/common/utils/utils.dart';
 
-import 'package:job_placement/features/home/models/post.dart';
+import 'package:job_placement/features/home/models/job_post.dart';
 
 import 'web_view_screen.dart';
 
 class JobDetailsPage extends StatelessWidget {
   const JobDetailsPage({super.key, required this.post});
-  final Post post;
+  final JobPost post;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
