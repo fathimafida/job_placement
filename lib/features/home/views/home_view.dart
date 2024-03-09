@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:job_placement/common/utils/utils.dart';
 
 import 'package:job_placement/features/add_edit_job_post/cubit/cubit/manage_job_cubit.dart';
+import 'package:job_placement/features/add_edit_job_post/views/add_edit_job_post.dart';
 
 import 'package:job_placement/features/home/cubit/job_home_cubit.dart';
+import 'package:job_placement/features/home/views/job_search.dart';
 import 'package:job_placement/features/home/widgets/job_list.dart';
 import 'package:logman/logman.dart';
 
@@ -84,7 +87,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 Spacer(),
                                 InkWell(
                                   onTap: () {
-                                    // context.push(JobRoutes.jobAddEdit);
+                                    navigateTO(context, AddEditJobPostScreen());
                                   },
                                   child: Container(
                                     padding: EdgeInsets.only(top: 4, bottom: 4),
@@ -112,7 +115,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                               child: Material(
                                 child: InkWell(
                                   onTap: () {
-                                    // context.push(JobRoutes.jobSearch);
+                                    navigateTO(context, JobSearchScreen());
                                   },
                                   child: IgnorePointer(
                                     ignoring: true,
@@ -139,7 +142,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 Spacer(),
                                 TextButton.icon(
                                   onPressed: () {
-                                    // context.push(JobRoutes.jobSearch);
+                                    navigateTO(context, JobSearchScreen());
                                   },
                                   label: Text(
                                     'Show all',
@@ -171,7 +174,7 @@ class _JobHomeScreenState extends State<JobHomeScreen> {
                                 Spacer(),
                                 TextButton.icon(
                                   onPressed: () {
-                                    // context.push(JobRoutes.jobSearch);
+                                    navigateTO(context, JobSearchScreen());
                                   },
                                   label: Text(
                                     'Show all',

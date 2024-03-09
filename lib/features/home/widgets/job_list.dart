@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_placement/common/utils/common_utils.dart';
+import 'package:job_placement/features/detailPage/views/job_detail_page.dart';
 import 'package:job_placement/features/home/models/job_post.dart';
 
 class JobListTile extends StatefulWidget {
@@ -19,10 +20,11 @@ class _JobListTileState extends State<JobListTile> {
     // final user = context.read<CoreCubit>().state.user;
     return InkWell(
       onTap: () {
-        // context.push(
-        //   JobRoutes.jobDetail,
-        //   extra: widget.post,
-        // );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => JobDetailScreen(post: widget.post),
+            ));
       },
       child: Card(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.6),

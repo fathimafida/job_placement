@@ -1,65 +1,99 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:job_placement/common/utils/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:job_placement/common/utils/utils.dart';
+import 'package:job_placement/features/add_edit_job_post/cubit/cubit/manage_job_cubit.dart';
+import 'package:job_placement/features/add_edit_job_post/views/add_edit_job_post.dart';
+import 'package:job_placement/features/detailPage/views/web_view_screen.dart';
 import 'package:job_placement/features/home/models/job_post.dart';
 
-import 'web_view_screen.dart';
-
-class JobDetailsPage extends StatelessWidget {
-  const JobDetailsPage({super.key, required this.post});
+class JobDetailScreen extends StatefulWidget {
+  const JobDetailScreen({super.key, required this.post});
   final JobPost post;
+
+  @override
+  State<JobDetailScreen> createState() => _JobDetailScreenState();
+}
+
+class _JobDetailScreenState extends State<JobDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Job details"),
-        centerTitle: true,
-      ),
+          title: const Text("Job details"),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () {
+                navigateTO(
+                    context,
+                    AddEditJobPostScreen(
+                      post: widget.post,
+                    ));
+              },
+              icon: const Icon(Icons.create_outlined),
+            ),
+            IconButton(
+              onPressed: () {
+                context.read<ManageJobCubit>().deleteJob(id: widget.post.id!);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.delete_outline),
+            )
+          ]),
+      extendBodyBehindAppBar: true,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: Stack(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                          child: Column(
-                        children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(10),
-                          //   height: 250,
-                          //   width: double.infinity,
-                          //   decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(15),
-                          //       border: Border.all(),
-                          //       image: DecorationImage(
-                          //           image: NetworkImage(post.image),
-                          //           fit: BoxFit.cover)),
-                          // ),
-                          CircleAvatar(
-                            radius: 85,
-                            backgroundImage: NetworkImage(
-                              post.image ?? "",
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            post.title ?? "",
-                            style: applyTextStyle(18, FontWeight.bold),
-                          ),
-                          Text("${post.companyName} - ${post.place}",
-                              style: applyTextStyle(14, FontWeight.normal)),
-                        ],
-                      )),
-                      const SizedBox(height: 15),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                        child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          height: 200,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(),
+                              image: DecorationImage(
+                                  image: NetworkImage(widget.post.image!),
+                                  fit: BoxFit.cover)),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          widget.post.title!,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          "${widget.post.companyName} - ${widget.post.place}",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ],
+                    )),
+                    const SizedBox(height: 15),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceVariant
+                              .withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.all(10),
                         child: Row(
                           children: [
                             Icon(
@@ -67,49 +101,55 @@ class JobDetailsPage extends StatelessWidget {
                               size: 25,
                               color: Theme.of(context)
                                   .colorScheme
-                                  .secondaryContainer,
+                                  .onSurfaceVariant,
                             ),
                             const SizedBox(
-                              width: 5,
+                              width: 6,
                             ),
-                            Text(post.jobType ?? '',
-                                style: applyTextStyle(16, FontWeight.normal))
+                            Text(
+                                "${widget.post.jobType} - ${widget.post.jobLocationType}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurfaceVariant)),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "Job Description",
-                        style: applyTextStyle(18, FontWeight.bold),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(post.description ?? "",
-                          style: applyTextStyle(14, FontWeight.normal)),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Divider(),
+                    const SizedBox(height: 5),
+                  ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  navigateTO(
-                      context,
-                      WebViewScreen(
-                        url: post.url ?? "",
-                      ));
-                },
-                child: Text(
-                  "Apply Now",
-                  style: applyTextStyle(18, FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(180, 50),
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
-                  foregroundColor: Theme.of(context).colorScheme.onBackground,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
+              Positioned(
+                bottom: 10,
+                left: 0,
+                right: 0,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    navigateTO(context, WebViewScreen(url: widget.post.url!));
+                  },
+                  child: Text(
+                    "Apply Now",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(180, 50),
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    foregroundColor: Theme.of(context).colorScheme.onBackground,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               )

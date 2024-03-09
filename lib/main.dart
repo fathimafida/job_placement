@@ -5,6 +5,7 @@ import 'package:job_placement/features/add_edit_job_post/cubit/cubit/manage_job_
 import 'package:job_placement/features/auth/cubit/auth_cubit.dart';
 import 'package:job_placement/features/auth/cubit/register_cubit.dart';
 import 'package:job_placement/features/auth/views/auth_screen.dart';
+import 'package:job_placement/features/home/cubit/cubit/job_search_cubit.dart';
 
 import 'package:job_placement/features/home/cubit/job_home_cubit.dart';
 import 'package:job_placement/features/home/views/home_view.dart';
@@ -29,6 +30,7 @@ class _MainAppState extends State<MainApp> {
         BlocProvider(create: (context) => ManageJobCubit()),
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => JobSearchCubit()),
       ],
       child: MaterialApp(
           theme: AppTheme.lightTheme,

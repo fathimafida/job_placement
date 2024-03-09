@@ -35,7 +35,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
           )
       });
 
-      final response = await dioClient.post("/job/posts", data: formData);
+      final response = await dioClient.post("/job/posts/", data: formData);
 
       print(response.data);
 
@@ -43,6 +43,7 @@ class ManageJobCubit extends Cubit<ManageJobState> {
         message: "Successfully added job post",
       ));
     } on DioException catch (e) {
+      print(e);
       print(e.response?.data?.toString());
       emit(ManageJobError(e.toString()));
     } catch (e) {

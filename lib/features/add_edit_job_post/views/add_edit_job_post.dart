@@ -84,7 +84,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       backgroundImage: _selectedImage != null
                           ? FileImage(File(_selectedImage!.path))
                           : widget.post?.image != null
-                              ? NetworkImage(widget.post!.image ?? "")
+                              ? NetworkImage(widget.post!.image!)
                                   as ImageProvider
                               : null,
                     ),
@@ -276,7 +276,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                     //           onSaved: (value) {
                     //             _descriptionController.text = value;
                     //             setState(() {});
-                    //             context.pop();
+
                     //           },
                     //           initialText: _descriptionController.text,
                     //         ));
@@ -291,7 +291,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                 TextFormField(
                     maxLength: 5000,
                     maxLines: 7,
-                    enabled: false,
+                    enabled: true,
                     controller: _descriptionController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
