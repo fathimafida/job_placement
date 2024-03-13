@@ -23,8 +23,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
     return Scaffold(
       appBar: AppBar(
           title: const Text("Job details"),
-          centerTitle: true,
           elevation: 0,
+          centerTitle: true,
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           actions: [
@@ -82,7 +82,9 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         ),
                       ],
                     )),
-                    const SizedBox(height: 15),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
@@ -123,7 +125,9 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       height: 15,
                     ),
                     Divider(),
-                    const SizedBox(height: 5),
+                    SizedBox(
+                      height: 15,
+                    )
                   ],
                 ),
               ),
