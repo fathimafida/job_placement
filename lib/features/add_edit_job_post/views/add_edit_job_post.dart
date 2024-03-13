@@ -339,7 +339,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                 BlocBuilder<ManageJobCubit, ManageJobState>(
                   builder: (context, state) {
                     if (state is ManageJobLoading) {
-                      return const CircularProgressIndicator();
+                      return Center(child: const CircularProgressIndicator());
                     }
                     return Center(
                       child: ElevatedButton(
@@ -383,18 +383,17 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                           widget.post != null ? "Edit Post" : "Post Job",
                         ),
                         style: ElevatedButton.styleFrom(
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                          minimumSize: Size(150, 50),
-                          backgroundColor: Color.fromARGB(255, 1, 27, 72),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                        ),
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                            minimumSize: Size(180, 50),
+                            backgroundColor: Color.fromARGB(255, 1, 27, 72),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            )),
                       ),
                     );
                   },
