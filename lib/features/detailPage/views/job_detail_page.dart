@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:job_placement/common/utils/utils.dart';
@@ -50,114 +51,102 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                    child: Column(
                   children: [
-                    Center(
-                        child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          height: 200,
-                          width: 250,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(),
-                              image: DecorationImage(
-                                  image: NetworkImage(widget.post.image!),
-                                  fit: BoxFit.cover)),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          widget.post.title!,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        Text(
-                          "${widget.post.companyName} - ${widget.post.place}",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ],
-                    )),
-                    const SizedBox(
-                      height: 15,
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundImage: NetworkImage(widget.post.image ?? ""),
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .surfaceVariant
-                              .withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.business_center,
-                              size: 25,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                            ),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                                "${widget.post.jobType} - ${widget.post.jobLocationType}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurfaceVariant)),
-                          ],
-                        ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.post.title!,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      "${widget.post.companyName} - ${widget.post.place}",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
+                )),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .surfaceVariant
+                        .withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.business_center,
+                        size: 25,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                          "${widget.post.jobType} - ${widget.post.jobLocationType}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant)),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  widget.post.description!,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      navigateTO(context, WebViewScreen(url: widget.post.url!));
+                    },
+                    child: Text(
+                      "Apply Now",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(180, 50),
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onBackground,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Divider(),
-                    SizedBox(
-                      height: 15,
-                    )
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 0,
-                right: 0,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    navigateTO(context, WebViewScreen(url: widget.post.url!));
-                  },
-                  child: Text(
-                    "Apply Now",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(180, 50),
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    foregroundColor: Theme.of(context).colorScheme.onBackground,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

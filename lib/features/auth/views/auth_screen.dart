@@ -47,7 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -163,10 +163,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         },
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(
-                            width: 55,
-                          ),
                           Text(
                             "Don't have an account?",
                             style: applyTextStyle(14, FontWeight.normal),
