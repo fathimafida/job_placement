@@ -63,7 +63,7 @@ class JOB_TYPE {
   static const PART_TIME = 'parttime';
   static const CONTRACT = 'contract';
   static const INTERNSHIP = 'internship';
-  static const TEMPORARY = 'temporary';
+  static const FREELANCE = 'freelance';
 }
 
 class JOB_LOCATION_TYPE {

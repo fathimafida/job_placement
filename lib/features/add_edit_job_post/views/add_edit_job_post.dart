@@ -130,7 +130,6 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-
                 TextFormField(
                     maxLength: 50,
                     controller: _companyNameController,
@@ -167,14 +166,6 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       return null;
                     }),
                 const SizedBox(height: 10),
-                // DescriptionSheetField(
-                //     onSaved: (String? value) {
-                //       setState(() {
-                //         _descriptionController.text = value ?? "";
-                //       });
-                //     },
-                //     descriptionController: _descriptionController),
-
                 const Text(
                   "Choose job type",
                   style: TextStyle(
@@ -211,7 +202,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       ),
                       DropdownMenuItem(
                         child: Text("Temporary"),
-                        value: JOB_TYPE.TEMPORARY,
+                        value: JOB_TYPE.FREELANCE,
                       ),
                     ],
                     onChanged: (value) {
@@ -257,7 +248,6 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                         _selectedJobLocationType = value;
                       });
                     }),
-
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,25 +259,9 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                         fontSize: 18,
                       ),
                     ),
-                    // ElevatedButton.icon(
-                    //   onPressed: () {
-                    //     context.push(CommonRoutes.markdownEditor,
-                    //         extra: MarkDownScreenProps(
-                    //           onSaved: (value) {
-                    //             _descriptionController.text = value;
-                    //             setState(() {});
-
-                    //           },
-                    //           initialText: _descriptionController.text,
-                    //         ));
-                    //   },
-                    //   icon: const Icon(Icons.visibility),
-                    //   label: const Text("Preview / Edit"),
-                    // ),
                   ],
                 ),
                 const SizedBox(height: 10),
-
                 TextFormField(
                     maxLength: 5000,
                     maxLines: 7,
@@ -305,7 +279,6 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                       }
                       return null;
                     }),
-
                 const SizedBox(height: 10),
                 Text(
                   "Job Apply Url",
@@ -334,8 +307,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
 
                       return null;
                     }),
-
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 BlocBuilder<ManageJobCubit, ManageJobState>(
                   builder: (context, state) {
                     if (state is ManageJobLoading) {
@@ -351,6 +323,7 @@ class _AddEditJobPostScreenState extends State<AddEditJobPostScreen> {
                                   content: Text("Please select a job type"),
                                 ),
                               );
+
                               return;
                             }
                             widget.post == null
