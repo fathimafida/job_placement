@@ -51,102 +51,113 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                    child: Column(
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      radius: 70,
-                      backgroundImage: NetworkImage(widget.post.image ?? ""),
+                    Center(
+                        child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 70,
+                          backgroundImage:
+                              NetworkImage(widget.post.image ?? ""),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          widget.post.title!,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          "${widget.post.companyName} - ${widget.post.place}",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ],
+                    )),
+                    const SizedBox(
+                      height: 15,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.post.title!,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      "${widget.post.companyName} - ${widget.post.place}",
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                )),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .surfaceVariant
-                        .withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.business_center,
-                        size: 25,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceVariant
+                            .withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      const SizedBox(
-                        width: 6,
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.business_center,
+                            size: 25,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                              "${widget.post.jobType} - ${widget.post.jobLocationType}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant)),
+                        ],
                       ),
-                      Text(
-                          "${widget.post.jobType} - ${widget.post.jobLocationType}",
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      widget.post.description!,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      right: 0,
+                      left: 0,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          navigateTO(
+                              context, WebViewScreen(url: widget.post.url!));
+                        },
+                        child: Text(
+                          "Apply Now",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
                               .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant)),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Divider(),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  widget.post.description!,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      navigateTO(context, WebViewScreen(url: widget.post.url!));
-                    },
-                    child: Text(
-                      "Apply Now",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(180, 50),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onBackground,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(180, 50),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onBackground,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
